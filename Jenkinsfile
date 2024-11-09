@@ -1,14 +1,14 @@
 node {
     stage('Clone repository') {
-        git credentialsId: 'github_access_token', url: 'https://github.com/hylee-kevin/web-count.git'
+        git credentialsId: 'docker-jenkins', url: 'https://github.com/shimyoonbum/fc-django.git'
     }
 
     stage('Build image') {
-       dockerImage = docker.build("leecloud/web_count:v1.0")
+       dockerImage = docker.build("xxyt778/web_count:v1.0")
     }
 
     stage('Push image') {
-        withDockerRegistry([ credentialsId: "docker-access", url: "" ]) {
+        withDockerRegistry([ credentialsId: "jenkins-token", url: "" ]) {
         dockerImage.push()
         }
     }
